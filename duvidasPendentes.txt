@@ -1,0 +1,33 @@
+não entendi os arquivos dentro da pasta _util
+
+entender mais sobre Readable, writable, transform streams
+
+desafio {
+    refazer todos os testes utilizando apenas os nomes dos testes como referencias
+    refazer as funções mais complexas {
+        ex: UploadHandler.js
+    }
+}
+
+o que é async iterator {
+    oque é "yield"
+}
+
+oque é pipeline ( importa-se de 'stream/promises' )
+oque é "padrão back pressure"
+oque signinfica 'continue' dentro de um if ?
+oque é nested functions
+aprender mais sobre "bind" e "apply"
+
+não entendi TestUtil.mockDateNow
+não entendi routes.post
+não entendi routes.test.post
+não entendi UploadHandler.prototype
+não entendi porque em routes.js não estava dando 100% de coverage por causa do "this.io = {}" NÃO estar no contructor
+
+
+//gdrive-webapp
+não antendi appController.onFileChange
+não antendi appController.updateProgress
+não entendi dragAndDrop.enableDrop
+

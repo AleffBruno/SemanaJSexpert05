@@ -1,0 +1,62 @@
+$ git clone https://github.com/ErickWendel/semana-javascript-expert05.git --recurse-submodules
+$ acessar a pasta ./initial-template e remover dar um "$ rm -rf .git" para poder subir para o repo pessoal
+
+> foi criado a pasta de api para poder iniciar o projeto
+
+> foi instalado todas as libs necessarioas para rodar o projeto....as mesmas podem ser vistas no package.json
+
+> foi adicionado "type": "module", no package.json para trabalhar com a versão mais nova do JS ( eu acho que é isso )
+
+> inicializar o Jest {
+    > ($ npx) olha para os modulos dentro da node_modules caso não estejam instalados globalmente
+    $ npx jest --init
+    > Perguntas do Jest {
+        - Quer que coloque na package.json? - yes
+        - Rodar em typescrip? - não
+        - Rodar em node ou browser? - node
+        - Code covegare? - yes
+        - V8 ou babel? - V8
+        - Limpe os mock a cada teste? - yes
+    }
+    > apos isso será gerado o arquivo jest.config.mjs, abra esse arquivo é configure
+    > (aqui não coloquei o que cada configuração faz em detalhes, procure na internet o que é cada uma...)
+    > é necessario fazer algumas alterações em "scripts" dentro da package.json relacionado aos testes ( abra o arquivo e veja como estão os scriprs de teste dentro de package.json )
+    > para rodar os testes pode-se utilizar $ npm test
+}
+
+> está sendo uma lib para VER logs (não será utilizado console.log), então foi criado dentro da pasta src um arquivo chamado logger.js ( veja )
+
+DEPLOY no heroku {
+    > subir o backend
+    > observe que a aplicação tem um certificado ssl local, porem o heroku cria o proprio ssl quando é produção, com isso não é necessario esse certificado ssl local
+    > o heroku usa http para aplicações internas e https para aplicações publicar na nuvem (prod)
+    > SEMPRE HAVERA UMA VARIAVEL "proccess.env.NODE_ENV" no heroku para manipular se é produção ou não
+    > foram feitas algumas alterações no index.js para ele se habilitar ao ambiente do heroku ( veja o arquivo )
+    > foi criado um script em package.json com o nome "prod" para poder colocar no heroku (veja o arquivo){
+        OBS> se for ambiente windowns, é necessario setar o NODE_ENV da seguite forma: "set NODE_ENV-production;"
+    }
+    > foi instalado a CLI do heroku globalmente, $ npm i -g heroku
+    $ heroku login
+    $ heroku apps ( lista as aplicações ja existentes )
+    > para subir é necessario ter um repositorio git ( pelo menos o "$ git init")
+    > cria-se o git ignore , $ npm gitignore node
+    > é necessario ignorar a pasta download manualmente. ( digite downloads/** dentro do .gitignore)
+    > faça o commit
+    > cria a aplicação no heroku com $ heroku apps:create {NOME_APLICACAO_UNICO}
+    > para conferir se o repo foi criado no heroku pode-se utilizar $ git remote -v
+    $ git push heroku master
+    > CASO DE ERRO, o heroku pode estar por exemplo trabalhando com a versão 5x do node, no caso essa aplicação necessita da 16x. pode-se acessar o package.json e adicionar a chave "engines" e setar que é necessario a versão desejada
+    $ heroku logs [-t] ( pode-se ver logs do heroku, bom para ver logs de erro caso dê algum má comportamento estranho )
+    > DEPLOY DO BACKENDFINALIZADO !!!!
+
+    > subir o frontend
+    > pegue a URL do backend e coloque no devido local no frontend para ele saber onde fazer as requests
+    > o "start" do package.json está rodando sem https, por padrão o heroku procura pelo "$ npm run start"
+    > aparentemente é a mesma coisa do backend
+}
+
+COMANDOS NICES DO HEROKU {
+    $ heroku run "df -h" --size=free  MOSTRA ALGUMAS INFORMAÇÕES ( uma delas é armazenamento )
+    $ heroku ps:exec ACESSA A INSTANCIA DO PROJETO ( é como se fosse um $ cd {projeto} )
+    $ heroku apps:delete (OBS: é necessario estar dentro da pasta onde o git está apontado pro repo do heroku)
+}
